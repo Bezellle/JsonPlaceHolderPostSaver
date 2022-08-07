@@ -1,8 +1,8 @@
 package Domain
 
 case class Post(
-                 userId: Int,
-                 id: Int,
+                 userId: UserId,
+                 id: PostId,
                  title: String,
                  body: String
                )

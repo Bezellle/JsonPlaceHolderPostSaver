@@ -1,8 +1,10 @@
-import API.JsonPlaceholderClient
+import API.{JsonPlaceholderClient, RequestTemplate}
+import Domain.Post
 
 object Main {
   def main(args: Array[String]): Unit = {
     println("Hello world!")
-    JsonPlaceholderClient.getAllPosts()
+    val client = new JsonPlaceholderClient(new RequestTemplate)
+    println(client.getAllPosts)
   }
 }

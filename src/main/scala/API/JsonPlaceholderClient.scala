@@ -1,24 +1,15 @@
 package API
 
+import API.Exception.JsonPlaceHolderException
 import Domain.Post
-import Exception.JsonPlaceHolderException
-import io.circe.generic.auto._
-import io.circe.parser
+import requests.Response
 
-object JsonPlaceholderClient extends DefaultClient {
+class JsonPlaceholderClient(requestTemplate: RequestTemplate) extends DefaultClient {
 
-  def getAllPosts() = {
-     getRequest("https://jsonplaceholder.typicode.com/posts") match {
-      case Right(response) if response.statusCode == 200 => decodeResponse(response.text().stripMargin)
-      case Left(errorDetails: RequestErrorDetails) => throw JsonPlaceHolderException(errorDetails)
+  def getAllPosts: List[Post] =
+     requestTemplate.getRequest("https://jsonplaceholder.typicode.com/posts") match {
+      case response: Response if response.is2xx => serialize[List[Post]](response.text())
+      case response: Response => throw JsonPlaceHolderException(response)
     }
-  }
-
-  private def decodeResponse(text: String): List[Post] = {
-    parser.decode[List[Post]](text) match {
-      case Right(decodedText) => decodedText
-      case Left(error) => throw new RuntimeException(error)
-    }
-  }
 
 }

@@ -1,14 +1,12 @@
 package API
 
-import requests.Response
+import org.json4s.jackson.JsonMethods.parse
+import org.json4s.{DefaultFormats, Formats}
 
 trait DefaultClient {
 
-  def getRequest(url: String): Either[RequestErrorDetails, Response] = {
-     requests.get(url) match {
-      case response: Response if response.is2xx => Right(response)
-      case response: Response   => Left(RequestErrorDetails(response.statusCode, response.statusMessage))
-    }
-  }
+  implicit val formats: Formats = DefaultFormats
 
+  def serialize[T: Manifest](responseBody: String): T =
+    parse(responseBody).extract[T]
 }
