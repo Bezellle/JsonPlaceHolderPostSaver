@@ -2,9 +2,7 @@ package API
 
 import Domain.{Post, PostId, UserId}
 import TestUtils.UnitSpec
-import com.fasterxml.jackson.core.JsonParseException
-import org.json4s.MappingException
-import org.scalatest.matchers.should.Matchers.{convertToAnyShouldWrapper, the}
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
 
 class DefaultClientTest extends UnitSpec {
