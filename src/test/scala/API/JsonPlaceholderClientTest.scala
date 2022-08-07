@@ -4,6 +4,8 @@ import API.Exception.JsonPlaceHolderException
 import API.JsonPlaceholderClientTest.JSPPostsUrl
 import Domain.{Post, PostId, UserId}
 import TestUtils.UnitSpec
+import com.fasterxml.jackson.core.JsonParseException
+import org.json4s.MappingException
 import org.scalatest.matchers.must.Matchers.have
 import org.scalatest.matchers.should.Matchers.{convertToAnyShouldWrapper, the}
 import requests.Response
@@ -29,7 +31,7 @@ class JsonPlaceholderClientTest extends UnitSpec {
     postResponse shouldBe List(Post(UserId(1), PostId(1), "test title", "test body"))
   }
 
-  "client" should "throw exception for nan 2xx response" in {
+  "client" should "throw exception for non 2xx response" in {
     Given("response with 404 status code")
     val givenResponse = Response(JSPPostsUrl, 404, "Not Found", null, Map(), None)
     val exceptionMessage = "JsonPlaceHolder respond with - 404 - Not Found"
@@ -40,6 +42,32 @@ class JsonPlaceholderClientTest extends UnitSpec {
 
     Then("")
     the[JsonPlaceHolderException] thrownBy client.getAllPosts should have message exceptionMessage
+  }
+
+  "client" should "fail at serializing request body without Id" in {
+    Given("response text without id as Json string")
+    val responseText = "[{\"userId\": 1,\"title\": \"test title\",\"body\": \"test body\"}]"
+    val givenResponse = Response(JSPPostsUrl, 200, "OK", new geny.Bytes(responseText.getBytes), Map(), None)
+
+    requestTemplate.getRequest _ expects JSPPostsUrl returning givenResponse
+
+    When("serializing request")
+
+    Then("MappingException should be thrown")
+    the[MappingException] thrownBy client.getAllPosts
+  }
+
+  "client" should "fail at serializing request body with null as Id" in {
+    Given("response text with null id as Json string")
+    val responseText = "[{\"userId\": 1,,\"id\": null,\"title\": \"test title\",\"body\": \"test body\"}]"
+    val givenResponse = Response(JSPPostsUrl, 200, "OK", new geny.Bytes(responseText.getBytes), Map(), None)
+
+    requestTemplate.getRequest _ expects JSPPostsUrl returning givenResponse
+
+    When("serializing request")
+
+    Then("JsonParseException should be thrown")
+    the[JsonParseException] thrownBy client.getAllPosts
   }
 
 }
