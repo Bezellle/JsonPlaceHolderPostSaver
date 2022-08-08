@@ -10,13 +10,13 @@ import scala.concurrent.Future
 
 class PostSavingService (jsonPlaceholderClient: JsonPlaceholderClient, postFileSaver: PostFileSaver){
 
-  def fetchAndSavePosts(): Future[List[PostId]] =
-   savePostsInParallel(fetchPosts)
+  def fetchAndSavePosts(directory: Option[String]): Future[List[PostId]] =
+   savePostsInParallel(fetchPosts, directory)
 
   private def fetchPosts: List[Post] =
     jsonPlaceholderClient.getAllPosts
 
-  private def savePostsInParallel(posts: List[Post]): Future[List[PostId]] = {
-    Future.traverse(posts)(post => Future(postFileSaver.savePost(post)))
+  private def savePostsInParallel(posts: List[Post], directory: Option[String]): Future[List[PostId]] = {
+    Future.traverse(posts)(post => Future(postFileSaver.savePost(post, directory)))
   }
 }
