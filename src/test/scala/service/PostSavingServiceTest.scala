@@ -4,11 +4,7 @@ import Client.JsonPlaceholderClient
 import Domain.{Post, PostId, UserId}
 import FlieSaver.PostFileSaver
 import TestUtils.UnitSpec
-import org.scalamock.scalatest.MockFactory
-import org.scalatest.GivenWhenThen
 import org.scalatest.concurrent.Eventually.eventually
-import org.scalatest.flatspec.AsyncFlatSpec
-import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -35,7 +31,8 @@ class PostSavingServiceTest extends UnitSpec {
     val result = service.fetchAndSavePosts(directory)
 
     Then("Ids of all posts should be returned")
-    result.map { postsIDs => assert(postsIDs == posts.map(_.id)) }
-
+    eventually {
+      result.map { postsIDs => assert(postsIDs == posts.map(_.id)) }
+    }
   }
 }
