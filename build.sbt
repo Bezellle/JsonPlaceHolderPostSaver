@@ -8,14 +8,17 @@ lazy val root = (project in file("."))
   )
 
 val requestsVersion = "0.7.1"
-val circeVersion = "0.14.1"
+val json4sVersion = "4.0.5"
 
-libraryDependencies ++= Seq(
-  "com.lihaoyi" %% "requests" % requestsVersion,
-)
+val scalaTest = "3.2.12"
+val scalaMock = "5.2.0"
 
-libraryDependencies += "org.scalamock" %% "scalamock" % "5.2.0" % Test
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.12" % Test
+libraryDependencies += "com.lihaoyi" %% "requests" % requestsVersion
 
-libraryDependencies += "org.json4s" %% "json4s-jackson" % "4.0.5"
+libraryDependencies += "org.json4s" %% "json4s-jackson" % json4sVersion
+
+libraryDependencies += "org.scalamock" %% "scalamock" % scalaMock % Test
+libraryDependencies += "org.scalatest" %% "scalatest" % scalaTest % Test
+
+
 
