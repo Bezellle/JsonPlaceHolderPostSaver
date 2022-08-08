@@ -17,7 +17,7 @@ class PostFileSaverTest extends UnitSpec {
     fileHandler.saveFile _ expects ("1.json", postJson)
 
     When("invoking PostFileSaver")
-    val id = saver.savePost(post)
+    val id = saver.savePost(post, None)
 
     Then("post should be saved")
     id shouldBe post.id

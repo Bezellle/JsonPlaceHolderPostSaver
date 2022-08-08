@@ -9,7 +9,7 @@ class PostFileSaver(fileHandler: FileHandler) {
 
   private implicit val formats: Formats = DefaultFormats
 
-  def savePost(post: Post): PostId = {
+  def savePost(post: Post, directory: Option[String]): PostId = {
       fileHandler.saveFile(composeFileName(post), write(post))
       post.id
     }
