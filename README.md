@@ -1,12 +1,10 @@
 # JsonPlaceHolderPostSaver
-
-----
+***
 This is simple scala application developed to download all posts from JsonPlaceHolder `https://jsonplaceholder.typicode.com/posts`  
 Each post is saved to separate file as `<post_id>.json`. By default, all files are saved in project directory.
 
 ## How to run the code
-
----
+***
 Project is built with `sbt`, so to run it type:
 
 ````
@@ -22,8 +20,7 @@ in command line. As you can see `<directory_path>` is optional argument used to 
 If given directory does not exist files will be saved in default project folder.
 
 ## External dependencies
-
----
+***
 
 As external dependencies project uses:
  * `Requests-Scala` library for Rest API requests. This is the Scala version of well-known `Requests` Python library.
