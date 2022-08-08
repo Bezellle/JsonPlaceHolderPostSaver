@@ -1,9 +1,8 @@
-import API.{JsonPlaceholderClient, RequestTemplate}
+import Client.{JsonPlaceholderClient, RequestTemplate}
 import FlieSaver.{FileHandler, PostFileSaver}
 import service.PostSavingService
 
 import scala.concurrent.Await
-import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.{Duration, SECONDS}
 import scala.util.{Failure, Success, Try}
 

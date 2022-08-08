@@ -1,4 +1,4 @@
-package API
+package Client
 
 import org.json4s.jackson.JsonMethods.parse
 import org.json4s.{DefaultFormats, Formats}

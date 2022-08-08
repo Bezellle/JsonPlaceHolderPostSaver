@@ -1,6 +1,6 @@
-package API
+package Client
 
-import API.Exception.JsonPlaceHolderException
+import Client.Exception.JsonPlaceHolderException
 import Domain.Post
 import requests.Response
 

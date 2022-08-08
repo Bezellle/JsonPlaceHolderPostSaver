@@ -1,7 +1,7 @@
-package API
+package Client
 
-import API.Exception.JsonPlaceHolderException
-import API.JsonPlaceholderClientTest.JSPPostsUrl
+import Client.Exception.JsonPlaceHolderException
+import Client.JsonPlaceholderClientTest.JSPPostsUrl
 import Domain.{Post, PostId, UserId}
 import TestUtils.UnitSpec
 import com.fasterxml.jackson.core.JsonParseException

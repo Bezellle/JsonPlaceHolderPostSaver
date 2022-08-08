@@ -1,4 +1,4 @@
-package API
+package Client
 
 import Domain.{Post, PostId, UserId}
 import TestUtils.UnitSpec

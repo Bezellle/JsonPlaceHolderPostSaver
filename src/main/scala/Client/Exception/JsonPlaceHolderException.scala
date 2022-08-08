@@ -1,4 +1,4 @@
-package API.Exception
+package Client.Exception
 
 import requests.Response
 

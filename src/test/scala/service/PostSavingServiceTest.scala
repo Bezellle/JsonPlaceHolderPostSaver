@@ -1,6 +1,6 @@
 package service
 
-import API.JsonPlaceholderClient
+import Client.JsonPlaceholderClient
 import Domain.{Post, PostId, UserId}
 import FlieSaver.PostFileSaver
 import org.scalamock.scalatest.MockFactory

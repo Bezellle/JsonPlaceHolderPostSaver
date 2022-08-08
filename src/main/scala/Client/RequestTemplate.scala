@@ -1,6 +1,6 @@
-package API
+package Client
 
-import API.RequestTemplate.TIMEOUT_MILLS
+import Client.RequestTemplate.TIMEOUT_MILLS
 import requests.Response
 
 class RequestTemplate {

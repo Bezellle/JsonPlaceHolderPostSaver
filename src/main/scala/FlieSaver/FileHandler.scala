@@ -2,6 +2,7 @@ package FlieSaver
 
 import java.io.{BufferedWriter, FileWriter}
 
+
 class FileHandler {
 
   def saveFile(fileName: String, fileBody: String): Unit = {
