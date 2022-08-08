@@ -3,12 +3,16 @@ package service
 import Client.JsonPlaceholderClient
 import Domain.{Post, PostId, UserId}
 import FlieSaver.PostFileSaver
+import TestUtils.UnitSpec
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.GivenWhenThen
+import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.flatspec.AsyncFlatSpec
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
-class PostSavingServiceTest extends AsyncFlatSpec with MockFactory with GivenWhenThen {
+import scala.concurrent.ExecutionContext.Implicits.global
+
+class PostSavingServiceTest extends UnitSpec {
 
   private val client = stub[JsonPlaceholderClient]
   private val fileSaver = mock[PostFileSaver]
@@ -21,16 +25,17 @@ class PostSavingServiceTest extends AsyncFlatSpec with MockFactory with GivenWhe
       Post(UserId(1), PostId(1), "test title", "test body"),
       Post(UserId(1), PostId(2), "test title2", "test body2")
     )
+    val directory = None
 
     (client.getAllPosts _).when().returns(posts)
-    (fileSaver.savePost _).expects(posts.head).returns(posts.head.id)
-    (fileSaver.savePost _).expects(posts(1)).returns(posts(1).id)
+    (fileSaver.savePost _).expects(posts.head, directory).returns(posts.head.id)
+    (fileSaver.savePost _).expects(posts(1), directory).returns(posts(1).id)
 
     When("service methods invoked")
-    val result = service.fetchAndSavePosts()
+    val result = service.fetchAndSavePosts(directory)
 
     Then("Ids of all posts should be returned")
-    result.map { postsIDs => postsIDs shouldBe posts.map(_.id) }
+    result.map { postsIDs => assert(postsIDs == posts.map(_.id)) }
 
   }
 }
