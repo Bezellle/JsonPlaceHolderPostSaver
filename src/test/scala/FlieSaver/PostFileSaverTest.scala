@@ -2,7 +2,7 @@ package FlieSaver
 
 import Domain.{Post, PostId, UserId}
 import TestUtils.UnitSpec
-import org.scalatest.matchers.must.Matchers.{be, noException}
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
 class PostFileSaverTest extends UnitSpec {
 
@@ -17,9 +17,10 @@ class PostFileSaverTest extends UnitSpec {
     fileHandler.saveFile _ expects ("1.json", postJson)
 
     When("invoking PostFileSaver")
-    noException should be thrownBy saver.savePost(post)
+    val id = saver.savePost(post)
 
     Then("post should be saved")
+    id shouldBe post.id
   }
 
 }
