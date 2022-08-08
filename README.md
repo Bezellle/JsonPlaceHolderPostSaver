@@ -1,5 +1,5 @@
 # JsonPlaceHolderPostSaver
-This is simple scala application developed to download all posts from JsonPlaceHolder `https://jsonplaceholder.typicode.com/posts`  
+This is simple scala application developed to download all posts from JsonPlaceHolder `https://jsonplaceholder.typicode.com/posts`
 Each post is saved to separate file as `<post_id>.json`. By default, all files are saved in project directory.
 
 ## How to run the code
