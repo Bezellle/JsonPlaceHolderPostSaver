@@ -11,5 +11,5 @@ class RequestTemplate {
 }
 
 object RequestTemplate {
-  val TIMEOUT_MILLS = 1000
+  val TIMEOUT_MILLS = 5000
 }
