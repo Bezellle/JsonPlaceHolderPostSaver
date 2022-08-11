@@ -2,7 +2,7 @@ package service
 
 import Client.JsonPlaceholderClient
 import Domain.{Post, PostId, UserId}
-import FlieSaver.PostFileSaver
+import FlieSaver.FileSaver
 import TestUtils.UnitSpec
 import org.scalatest.concurrent.Eventually.eventually
 
@@ -11,7 +11,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 class PostSavingServiceTest extends UnitSpec {
 
   private val client = stub[JsonPlaceholderClient]
-  private val fileSaver = mock[PostFileSaver]
+  private val fileSaver = mock[FileSaver]
 
   val service = new PostSavingService(client, fileSaver)
 

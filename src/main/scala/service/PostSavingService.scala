@@ -2,13 +2,13 @@ package service
 
 import Client.JsonPlaceholderClient
 import Domain.{Post, PostId}
-import FlieSaver.PostFileSaver
+import FlieSaver.FileSaver
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 
-class PostSavingService (jsonPlaceholderClient: JsonPlaceholderClient, postFileSaver: PostFileSaver){
+class PostSavingService (jsonPlaceholderClient: JsonPlaceholderClient, postFileSaver: FileSaver){
 
   def fetchAndSavePosts(directory: Option[String]): Future[List[PostId]] =
    savePostsInParallel(fetchPosts, directory)

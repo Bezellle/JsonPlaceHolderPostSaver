@@ -9,7 +9,7 @@ class PostFileSaverTest extends UnitSpec {
 
   private val fileHandler = mock[FileHandler]
   private val validator = mock[DirectoryValidator]
-  private val saver = new PostFileSaver(fileHandler, validator)
+  private val saver = new FileSaver(fileHandler, validator)
 
   it should "invoke file saving without file directory" in {
     Given("post")
