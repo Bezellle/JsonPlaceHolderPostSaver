@@ -5,10 +5,12 @@ import FlieSaver.FileSaver
 
 import java.nio.file.Path
 
-class CommentSavingService(client: JsonPlaceholderClient, fileSaver: FileSaver) {
+abstract class CommentSavingService(client: JsonPlaceholderClient, fileSaver: FileSaver) {
 
   def fetchAndSaveComments(numberOfPosts: Int, directory: Option[Path]) = {
-    val posts = client.getAllPosts.take(numberOfPosts).flatMap(post => client.getCommentsForPost(post.id)).groupBy()
+    val posts = client.getAllPosts.take(numberOfPosts)
+      .flatMap(post => client.getCommentsForPost(post.id))
+      .groupBy(_.email.mailDomain)
 
   }
 

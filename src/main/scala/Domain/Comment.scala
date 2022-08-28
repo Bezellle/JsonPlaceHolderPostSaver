@@ -2,8 +2,8 @@ package Domain
 
 case class Comment(
                   postId: PostId,
-                  id: String,
+                  id: CommentId,
                   name: String,
-                  email: String,
+                  email: Email,
                   body: String
                   )

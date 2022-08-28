@@ -27,12 +27,12 @@ object Main {
 //    if (!directory.exists(validator.isValidDirectory))
 //      println("No valid directory for saving provided. Posts will be saved in source directory")
 
-    val savedPostsIds = service.fetchAndSavePosts(directory)
+//    val savedPostsIds = service.fetchAndSavePosts(directory)
 
-    Try { Await.result(savedPostsIds, Duration(5, SECONDS)) } match {
-      case Success(result) => println(s"Successfully fetched and saved ${result.size} posts")
-      case Failure(exception) => throw exception
-    }
+//    Try { Await.result(savedPostsIds, Duration(5, SECONDS)) } match {
+//      case Success(result) => println(s"Successfully fetched and saved ${result.size} posts")
+//      case Failure(exception) => throw exception
+//    }
   }
 
   private def parseProgramArguments(args: Array[String]): ProgramArguments = {
