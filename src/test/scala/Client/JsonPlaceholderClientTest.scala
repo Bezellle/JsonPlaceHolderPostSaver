@@ -2,7 +2,7 @@ package Client
 
 import Client.Exception.JsonPlaceHolderException
 import Client.JsonPlaceholderClientTest.JSPPostsUrl
-import Domain.{Post, PostId, UserId}
+import Domain.Post.{Post, PostId, UserId}
 import TestUtils.UnitSpec
 import com.fasterxml.jackson.core.JsonParseException
 import org.json4s.MappingException
@@ -28,7 +28,7 @@ class JsonPlaceholderClientTest extends UnitSpec {
     val postResponse = client.getAllPosts
 
     Then("correct list of posts should be received")
-    postResponse shouldBe List(Post(UserId(1), PostId(1), "test title", "test body"))
+    postResponse shouldBe List(Domain.Post.Post(UserId(1), PostId(1), "test title", "test body"))
   }
 
   "client" should "throw exception for non 2xx response" in {

@@ -1,6 +1,8 @@
-package Client.Response
+package Comment.ResponseMapper
 
-import Domain.{Comment, CommentId, Email, PostId}
+import Client.Response.CommentResponse
+import Domain.Comment.{Comment, CommentId, Email}
+import Domain.Post.PostId
 
 import scala.util.matching.Regex
 
@@ -9,7 +11,7 @@ object CommentResponseMapper {
   val EmailPattern: Regex = """^(\w+)@(\w+(.\w+)+)$""".r
 
   def toComment(commentResponse: CommentResponse): Comment =
-    Comment(
+    Domain.Comment.Comment(
       PostId(commentResponse.postId),
       CommentId(commentResponse.id),
       commentResponse.name,

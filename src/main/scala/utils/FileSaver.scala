@@ -1,6 +1,6 @@
-package FlieSaver
+package utils
 
-import Domain.{Post, PostId}
+import Domain.Post.{Post, PostId}
 import org.json4s.jackson.Serialization.write
 import org.json4s.{DefaultFormats, Formats}
 import validator.DirectoryValidator

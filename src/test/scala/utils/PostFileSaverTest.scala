@@ -1,6 +1,6 @@
-package FlieSaver
+package utils
 
-import Domain.{Post, PostId, UserId}
+import Domain.Post.{Post, PostId, UserId}
 import TestUtils.UnitSpec
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 import validator.DirectoryValidator
@@ -13,7 +13,7 @@ class PostFileSaverTest extends UnitSpec {
 
   it should "invoke file saving without file directory" in {
     Given("post")
-    val post = Post(UserId(1), PostId(1), "test title", "test body")
+    val post = Domain.Post.Post(UserId(1), PostId(1), "test title", "test body")
     val postJson = """{"userId":1,"id":1,"title":"test title","body":"test body"}"""
 
     fileHandler.saveFile _ expects ("1.json", postJson)
@@ -27,7 +27,7 @@ class PostFileSaverTest extends UnitSpec {
 
   it should "invoke file saving with valid file directory" in {
     Given("post with directory")
-    val post = Post(UserId(1), PostId(1), "test title", "test body")
+    val post = Domain.Post.Post(UserId(1), PostId(1), "test title", "test body")
     val postJson = """{"userId":1,"id":1,"title":"test title","body":"test body"}"""
     val directory = "/dir"
 
@@ -43,7 +43,7 @@ class PostFileSaverTest extends UnitSpec {
 
   it should "invoke file saving with non valid file directory" in {
     Given("post with directory")
-    val post = Post(UserId(1), PostId(1), "test title", "test body")
+    val post = Domain.Post.Post(UserId(1), PostId(1), "test title", "test body")
     val postJson = """{"userId":1,"id":1,"title":"test title","body":"test body"}"""
     val directory = "/dir"
 

@@ -1,4 +1,4 @@
-package Domain
+package Domain.Post
 
 case class Post(
                  userId: UserId,

@@ -1,10 +1,11 @@
 package service
 
 import Client.JsonPlaceholderClient
-import Domain.{Post, PostId, UserId}
-import FlieSaver.FileSaver
+import Domain.Post.{PostId, UserId}
+import Post.PostSavingService
 import TestUtils.UnitSpec
 import org.scalatest.concurrent.Eventually.eventually
+import utils.FileSaver
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -18,8 +19,8 @@ class PostSavingServiceTest extends UnitSpec {
   "service" should "fetch all products and trigger saving posts" in {
     Given("List of posts")
     val posts = List(
-      Post(UserId(1), PostId(1), "test title", "test body"),
-      Post(UserId(1), PostId(2), "test title2", "test body2")
+      Domain.Post.Post(UserId(1), PostId(1), "test title", "test body"),
+      Domain.Post.Post(UserId(1), PostId(2), "test title2", "test body2")
     )
     val directory = None
 

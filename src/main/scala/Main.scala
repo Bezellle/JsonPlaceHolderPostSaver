@@ -1,6 +1,6 @@
 import Client.{JsonPlaceholderClient, RequestTemplate}
-import FlieSaver.{FileHandler, FileSaver}
-import service.PostSavingService
+import utils.{FileHandler, FileSaver}
+import Post.PostSavingService
 import validator.DirectoryValidator
 
 import java.nio.file.{Path, Paths}
@@ -12,8 +12,6 @@ import scala.util.{Failure, Success, Try}
 object Main {
 
   case class ProgramArguments(numberOfPosts: Int, directory: Option[Path])
-
-
 
   def main(args: Array[String]): Unit = {
     val client = new JsonPlaceholderClient(new RequestTemplate)

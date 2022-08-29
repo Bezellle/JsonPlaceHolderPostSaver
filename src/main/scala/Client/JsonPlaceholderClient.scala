@@ -2,8 +2,8 @@ package Client
 
 import Client.Exception.JsonPlaceHolderException
 import Client.JsonPlaceholderClient.BaseUrl
-import Client.Response.{CommentResponse, CommentResponseMapper}
-import Domain.{Comment, Post, PostId}
+import Client.Response.CommentResponse
+import Domain.Post.{Post, PostId}
 import requests.Response
 
 class JsonPlaceholderClient(requestTemplate: RequestTemplate) extends DefaultClient {
@@ -14,10 +14,9 @@ class JsonPlaceholderClient(requestTemplate: RequestTemplate) extends DefaultCli
       case response: Response => throw JsonPlaceHolderException(response)
     }
 
-  def getCommentsForPost(postId: PostId): List[Comment] =
+  def getCommentsForPost(postId: PostId): List[CommentResponse] =
     requestTemplate.getRequest(s"$BaseUrl/comments?postId=${postId.id}") match {
       case response: Response if response.is2xx => serialize[List[CommentResponse]](response.text())
-        .map(CommentResponseMapper.toComment)
       case response: Response => throw JsonPlaceHolderException(response)
     }
 }

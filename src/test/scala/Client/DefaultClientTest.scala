@@ -1,6 +1,6 @@
 package Client
 
-import Domain.{Post, PostId, UserId}
+import Domain.Post.{Post, PostId, UserId}
 import TestUtils.UnitSpec
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
@@ -19,7 +19,7 @@ class DefaultClientTest extends UnitSpec {
     val serializedResponse = client.serialize[List[Post]](responseText)
 
     Then("response should be properly serialized")
-    serializedResponse shouldBe List(Post(UserId(1), PostId(1), "test title", "test body"))
+    serializedResponse shouldBe List(Domain.Post.Post(UserId(1), PostId(1), "test title", "test body"))
   }
 
 }
